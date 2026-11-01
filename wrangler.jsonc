@@ -1,0 +1,34 @@
+// Configuración de Cloudflare Workers para Gastos Familiares.
+// Pasos manuales (cuenta, conexión con GitHub, variables): docs/SETUP.md.
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+
+  // Producción: https://app.gastos-familiares.workers.dev, sale de la rama `main`.
+  // El nombre tiene que coincidir con el del Worker en el panel de Cloudflare.
+  "name": "app",
+  "main": "./servidor/worker.ts",
+  "compatibility_date": "2026-10-01",
+
+  // GOOGLE_CLIENT_ID y los secretos se cargan en el panel de Cloudflare. Sin esto,
+  // cada publicación borraría las variables cargadas ahí. Vale para los dos entornos
+  // (wrangler no lo acepta dentro de "env").
+  "keep_vars": true,
+
+  "assets": {
+    // Lo que genera `npm run build` (la app ya armada).
+    "directory": "./dist",
+    // App de una sola página: una ruta que no es un archivo devuelve index.html.
+    "not_found_handling": "single-page-application",
+    // Solo /api/* pasa por el Worker (el login). El resto son archivos estáticos,
+    // que Cloudflare sirve gratis y sin límite. Cabeceras: public/_headers.
+    "run_worker_first": ["/api/*"],
+  },
+
+  "env": {
+    // Sitio de prueba: https://prueba.gastos-familiares.workers.dev, sale de `dev`.
+    // Usa una planilla aparte (src/config.ts → esEntornoDePrueba). Se publica con --env prueba.
+    "prueba": {
+      "name": "prueba",
+    },
+  },
+}

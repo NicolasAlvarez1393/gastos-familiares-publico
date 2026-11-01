@@ -1,0 +1,189 @@
+@import 'tailwindcss';
+
+/*
+ * Colores semánticos de la app. Los componentes usan estos nombres
+ * (bg-fondo, text-texto, bg-ingreso…) y nunca un color fijo, así el
+ * modo oscuro sale solo cambiando las variables de abajo.
+ */
+@theme inline {
+  --color-fondo: var(--gf-fondo);
+  --color-superficie: var(--gf-superficie);
+  --color-borde: var(--gf-borde);
+  --color-texto: var(--gf-texto);
+  --color-texto-suave: var(--gf-texto-suave);
+  --color-marca: var(--gf-marca);
+  --color-marca-texto: var(--gf-marca-texto);
+  --color-marca-suave: var(--gf-marca-suave);
+  --color-gasto: var(--gf-gasto);
+  --color-ingreso: var(--gf-ingreso);
+  --color-aviso: var(--gf-aviso);
+  --color-velo: var(--gf-velo);
+  --color-persona-1: var(--gf-persona-1);
+  --color-persona-2: var(--gf-persona-2);
+  --color-persona-3: var(--gf-persona-3);
+  --color-persona-4: var(--gf-persona-4);
+  --color-persona-5: var(--gf-persona-5);
+  --color-persona-6: var(--gf-persona-6);
+
+  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+/*
+ * Movimiento: cortito (menos de un cuarto de segundo) y solo si el teléfono no pide "reducir
+ * movimiento" (se usa con `motion-safe:`). Las hojas suben desde abajo; en tablet y compu, que
+ * son una ventana en el medio, aparecen con un leve zoom.
+ */
+@theme {
+  --animate-subir: gf-subir 240ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  --animate-acercar: gf-acercar 180ms ease-out;
+  --animate-aparecer: gf-aparecer 180ms ease-out;
+  --animate-bajar: gf-bajar 200ms ease-out;
+
+  @keyframes gf-subir {
+    from {
+      transform: translateY(100%);
+    }
+  }
+  @keyframes gf-acercar {
+    from {
+      opacity: 0;
+      transform: scale(0.96);
+    }
+  }
+  @keyframes gf-aparecer {
+    from {
+      opacity: 0;
+    }
+  }
+  @keyframes gf-bajar {
+    from {
+      opacity: 0;
+      transform: translateY(-0.75rem);
+    }
+  }
+}
+
+/* Pantallas altas (760 px o más: la mayoría de los teléfonos de hoy): en Cargar entra una fila más de
+   categorías. Con 736-740 px (Galaxy S8/S9, iPhone 8 Plus) ya no entra sin desplazar: medido. */
+@custom-variant alta (@media (min-height: 47.5rem));
+/* Una cuarta fila de categorías en Cargar (teléfonos de 888 px o más de alto). */
+@custom-variant muy-alta (@media (min-height: 55.5rem));
+
+:root {
+  --gf-fondo: #f6f7f9;
+  --gf-superficie: #ffffff;
+  --gf-borde: #e3e6ea;
+  --gf-texto: #14181f;
+  --gf-texto-suave: #5d6673;
+  --gf-marca: #0f766e;
+  --gf-marca-texto: #ffffff;
+  --gf-marca-suave: #e0f2f0;
+  --gf-gasto: #b4232c;
+  --gf-ingreso: #157f3b;
+  /* Aviso (presupuesto al 80 %): ámbar, ni bueno ni malo todavía. */
+  --gf-aviso: #b45309;
+  /* Fondo oscuro detrás de las hojas que suben desde abajo. */
+  --gf-velo: rgb(8 10 14 / 0.45);
+  /* Personas: tonos neutros y parejos, sin connotación de "bueno/malo". */
+  --gf-persona-1: #4f6bd8;
+  --gf-persona-2: #c2862a;
+  --gf-persona-3: #8a5cc4;
+  --gf-persona-4: #c0567e;
+  --gf-persona-5: #3b8ea5;
+  --gf-persona-6: #7a7f8a;
+  /* En claro, las tarjetas blancas casi no se separan del fondo: una sombra muy suave las despega. */
+  --gf-sombra: 0 1px 2px rgb(16 24 40 / 0.05), 0 2px 6px rgb(16 24 40 / 0.06);
+
+  color-scheme: light dark;
+}
+
+/*
+ * Oscuro. `data-tema` lo pone public/tema.js antes de dibujar la pantalla: el tema elegido en
+ * Ajustes o, con "Como el teléfono", el del teléfono (y lo cambia solo si el teléfono cambia).
+ */
+:root[data-tema='oscuro'] {
+  --gf-fondo: #0e1116;
+  --gf-superficie: #171b22;
+  --gf-borde: #2a313b;
+  --gf-texto: #eef1f5;
+  --gf-texto-suave: #9aa4b2;
+  --gf-marca: #2dd4bf;
+  --gf-marca-texto: #04201d;
+  --gf-marca-suave: #123532;
+  --gf-gasto: #f2727a;
+  --gf-ingreso: #4ade80;
+  --gf-aviso: #fbbf24;
+  --gf-velo: rgb(0 0 0 / 0.6);
+  --gf-persona-1: #8da2f0;
+  --gf-persona-2: #e2b15f;
+  --gf-persona-3: #b996e8;
+  --gf-persona-4: #e88aae;
+  --gf-persona-5: #6cc3da;
+  --gf-persona-6: #aab0bb;
+  /* En oscuro, la profundidad la da la superficie más clara: sin sombra. */
+  --gf-sombra: none;
+  color-scheme: dark;
+}
+
+/* Lo nativo del navegador (campos, listas desplegables, barras) sigue al tema que se ve. */
+:root[data-tema='claro'] {
+  color-scheme: light;
+}
+
+/* Tarjetas, listas y teclas: sombra suave en claro (ver --gf-sombra), nada en oscuro. */
+@utility sombra-tarjeta {
+  box-shadow: var(--gf-sombra);
+}
+
+/* Filas que se deslizan de costado (chips): sin barra visible, como en el teléfono. */
+@utility sin-barra {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@layer base {
+  html,
+  body {
+    height: 100%;
+    overflow: hidden;
+  }
+
+  /*
+   * El marco de la app, pegado a los bordes de lo que se ve. No `height: 100dvh`: en Android, al
+   * cambiar el tema (y con eso el color de la barra de estado), Chrome lo recalculaba más alto que
+   * la pantalla y la barra de abajo quedaba afuera hasta recargar; en el iPhone no pasaba
+   * (hipótesis, PENDIENTES #27). El notch y la barra de gestos los respetan el encabezado y la
+   * barra inferior (safe-area): así la app ocupa toda la pantalla.
+   */
+  #root {
+    position: fixed;
+    inset: 0;
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+
+  body {
+    @apply bg-fondo font-sans text-texto antialiased;
+    /* Sin rebote ni "tirar para recargar" accidental mientras se carga un gasto. */
+    overscroll-behavior: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  button {
+    cursor: pointer;
+    touch-action: manipulation; /* sin demora de doble toque en mobile */
+  }
+
+  /* Al tocar, el botón se achica un poquito: la respuesta que se siente en el dedo. No el fondo
+     oscuro de las hojas (es un botón que ocupa toda la pantalla). */
+  @media (prefers-reduced-motion: no-preference) {
+    button:not([aria-hidden='true']) {
+      transition: transform 120ms ease;
+    }
+    button:not([aria-hidden='true']):active:not(:disabled) {
+      transform: scale(0.97);
+    }
+  }
+}

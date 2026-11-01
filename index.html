@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="es-AR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Gastos Familiares</title>
+    <meta name="description" content="El balance de la casa: gastos, ingresos y cuotas." />
+
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/logo.svg" sizes="any" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon-180x180.png" />
+
+    <!-- Color de la barra de estado según el modo del teléfono. tema.js lo cambia al tema que
+         se ve (el elegido en Ajustes), antes de dibujar nada. -->
+    <meta name="theme-color" content="#f6f7f9" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0e1116" media="(prefers-color-scheme: dark)" />
+    <script src="/tema.js"></script>
+
+    <!-- Abrir como app (sin barra del navegador) al instalarla en inicio. El manifest
+         alcanza en iOS 16.4+; las metas cubren iPhones con iOS más viejo. -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <!-- iPhone: nombre bajo el ícono y barra de estado al instalar en inicio. -->
+    <meta name="apple-mobile-web-app-title" content="Gastos" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

@@ -1,0 +1,60 @@
+/* Página estática de privacidad: va aparte de la app (la pide Google para publicar el login).
+   Archivo propio, igual que el resto: el código no usa estilos en línea. */
+:root {
+  --fondo: #f6f7f9;
+  --texto: #1f2933;
+  --suave: #5f6b7a;
+  --marca: #2f6f5e;
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fondo: #12161b;
+    --texto: #e6e9ed;
+    --suave: #9aa5b1;
+    --marca: #7cc4ad;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--fondo);
+  color: var(--texto);
+  font:
+    16px/1.6 system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
+}
+
+main {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: max(1.5rem, env(safe-area-inset-top)) 1rem 3rem;
+}
+
+h1 {
+  font-size: 1.6rem;
+  margin-bottom: 0.25rem;
+}
+
+h2 {
+  font-size: 1.15rem;
+  margin-top: 2rem;
+}
+
+.suave {
+  color: var(--suave);
+  margin-top: 0;
+}
+
+a {
+  color: var(--marca);
+  overflow-wrap: anywhere;
+}
+
+li {
+  margin-bottom: 0.5rem;
+}

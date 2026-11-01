@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Gastos Familiares: una casa con un signo "=" (el balance que cierra). -->
+  <rect width="512" height="512" rx="112" fill="#0f766e"/>
+  <path d="M256 104 L412 232 V408 H100 V232 Z" fill="none" stroke="#ffffff" stroke-width="34" stroke-linejoin="round"/>
+  <path d="M192 282 H320 M192 340 H320" stroke="#ffffff" stroke-width="30" stroke-linecap="round"/>
+</svg>

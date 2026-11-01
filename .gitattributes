@@ -1,0 +1,8 @@
+# Todo el texto con fin de línea LF, sin importar el sistema operativo.
+* text=auto eol=lf
+
+# Binarios
+*.png binary
+*.jpg binary
+*.ico binary
+*.woff2 binary
